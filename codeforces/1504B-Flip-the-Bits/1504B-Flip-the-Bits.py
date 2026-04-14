@@ -1,26 +1,43 @@
-n,k=map(int,input().split())
-a=list(map(int,input().split()))
-freq={}
-unique=0
-max_len=0
-left=0
-best_l=0
-best_r=0
-for r in range(n):
-    if a[r] not in freq:
-        freq[a[r]]=0
-    if freq[a[r]]==0:
-        unique+=1
-    freq[a[r]]+=1
+t = int(input())
 
-    while unique>k:
-        freq[a[left]]-=1
-        if freq[a[left]]==0:
-            unique-=1
-        left+=1
+for _ in range(t):
+    n = int(input())
+    s = input()
+    a = input()
 
-    if r-left+1>max_len:
-        max_len=r-left+1
-        best_l=left
-        best_r=r
-print(best_l+1,best_r+1)
+    zero_count = 0
+    one_count = 0
+    arr = []
+
+    for i in range(n):
+        if s[i] == "0":
+            zero_count += 1
+        else:
+            one_count += 1
+
+        arr.append([zero_count, one_count])
+
+    flip =  0
+    possible = True
+
+    for i in range(n-1, -1, -1):
+
+        if flip % 2 == 0:
+            if s[i] != a[i]:
+                if arr[i][0] != arr[i][1]:
+                    possible = False
+                    break
+                else:
+                    flip += 1
+        else:
+            if s[i] == a[i]:
+                if arr[i][0] != arr[i][1]:
+                    possible = False
+                    break
+                else:
+                    flip += 1
+
+    if possible:
+        print("YES")
+    else:
+        print("NO")
