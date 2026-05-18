@@ -2,10 +2,8 @@ class Solution:
     def countCharacters(self, words: List[str], chars: str) -> int:
         ch={}
         res=0
-
-        for char in chars:
-            ch[char]=ch.get(char,0)+1
-
+        for c in chars:
+            ch[c]=ch.get(c,0)+1
         for word in words:
             copy=ch.copy()
 
@@ -16,4 +14,5 @@ class Solution:
                     res-=len(word)
                     break
             res+=len(word)
-        return res   
+        return res
+            
